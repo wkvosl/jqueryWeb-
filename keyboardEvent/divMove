@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <script src="jquery.js"></script>
+   
+    <script>
+       
+    $(function(){
+	$(document).on("keydown", keyEventFnc);
+
+	function keyEventFnc(e) {
+
+        var marginT = ($('#nemo').css('margin-top'));
+        var marginL = ($('#nemo').css('margin-left'));
+        var marginTint = parseInt(marginT);
+        var marginLint = parseInt(marginL);
+        
+if(marginTint <= 0) {$('#nemo').css('margin-top','0px')};
+if(marginLint <= 0) {$('#nemo').css('margin-left','0px')};
+if(marginTint > 750) {$('#nemo').css('margin-top','750px')};
+if(marginLint > 801) {$('#nemo').css('margin-left','800px')};
+
+
+	switch(e.keyCode){
+		case 37: $('#nemo').animate({marginLeft:'-=50px'},1);
+		break;
+		case 38: $('#nemo').animate({marginTop:'-=50px'},1);
+		break;
+		case 39: $('#nemo').animate({marginLeft:'+=50px'},1);
+		break;
+		case 40: $('#nemo').animate({marginTop:'+=50px'},1);
+		break;
+	}
+            
+    
+	}
+});
+
+    </script>
+
+
+</head>
+<body >
+<div style="height: 900px; width: 900px; background-color: aqua;">
+    <div id="nemo" style="background-color: blue; height: 100px; width: 100px; position: absolute"></div>
+</div>
+
+</body>
+</html>
