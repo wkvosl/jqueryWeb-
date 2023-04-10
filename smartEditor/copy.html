@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!-- 참고 블로그 문법(?): https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=monkeychoi&logNo=60171723220 -->
+<html lang="ko_KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="/smartEditor/se2/js/service/HuskyEZCreator.js"></script>
+</head>
+<body>
+    
+    <textarea name="ir1" id="ir1" rows="10" cols="100"><span id="pd_content" style="color:#aaa"></span></textarea>
+
+ 
+    <script id="smartEditor" type="text/javascript"> 
+        sHTML = "<span style='color:#aaa'>1. 자유게시판은 고객분들이 자유롭게 의견을 나눌 수 있는 공간입니다.</span>";
+        var oEditors = [];
+        
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "ir1",  //textarea ID 입력
+            sSkinURI: "/smartEditor/se2/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
+            fCreator: "createSEditor2",
+            htParams : { 
+            // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+            bUseToolbar : true, 
+            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+            bUseVerticalResizer : true, 
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+            bUseModeChanger : false 
+            }
+        
+            ,
+            fOnAppLoad:function(){
+                oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);            
+                  
+                var iframeInputArea = $("iframe[src='/smartEditor/se2/SmartEditor2Skin.html']").contents().find("iframe[id='se2_iframe']").contents().find('.se2_inputarea');
+                    iframeInputArea.one("click", function() {
+                        deleteHTML();
+                    });
+            },
+            fCreator:"createSEditor2"
+        });
+        function deleteHTML() {
+            oEditors.getById["ir1"].exec("SET_IR", [""]);
+        }
+    </script>
+</body>
+</html>
+
